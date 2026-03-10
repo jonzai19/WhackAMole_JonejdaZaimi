@@ -3,7 +3,7 @@ using UnityEngine;
 public class PokeButtonDebug : MonoBehaviour
 {
     public GameObject hammerPrefab;
-    public Transform rightHandAttach;
+    public Transform hammerSocket; // Socket where the hammer spawns and can be grabbed from
 
     private GameObject currentHammer;
 
@@ -13,7 +13,7 @@ public class PokeButtonDebug : MonoBehaviour
 
         if (hammerPrefab == null) return;
 
-        if (rightHandAttach == null) return;
+        if (hammerSocket == null) return;
 
         if (currentHammer != null)
         {
@@ -26,11 +26,12 @@ public class PokeButtonDebug : MonoBehaviour
         currentHammer.name = hammerPrefab.name + "_SPAWNED";
 
         Debug.Log("Instantiated hammer object: " + currentHammer.name);
-
-        currentHammer.transform.SetParent(rightHandAttach, worldPositionStays: false);
-        currentHammer.transform.localPosition = Vector3.zero;
-        currentHammer.transform.localRotation = Quaternion.identity;
-        currentHammer.transform.localScale = Vector3.one;
+        
+        currentHammer.transform.position = hammerSocket.position;
+        currentHammer.transform.rotation = hammerSocket.rotation;
+        currentHammer.transform.localScale = Vector3.one * 6f; 
+        
+        Debug.Log("Hammer spawned at " + hammerSocket.position + " with scale: " + currentHammer.transform.localScale);
 
         currentHammer.SetActive(true);
     }

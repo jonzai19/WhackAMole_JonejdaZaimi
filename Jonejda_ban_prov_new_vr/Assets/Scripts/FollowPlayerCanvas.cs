@@ -7,6 +7,7 @@ public class FollowPlayerCanvas : MonoBehaviour
     public float heightOffset = -0.2f;
     public float followSpeed = 5f;
     public float rotationSpeed = 5f;
+    [SerializeField] GameObject panel;
 
     void LateUpdate()
     {
@@ -23,5 +24,20 @@ public class FollowPlayerCanvas : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
+    }
+    
+    public void OnStartButtonPressed()
+    {
+        panel.SetActive(false);
+    }
+    
+    public void OnExitButtonPressed()
+    {
+        // Beende die Anwendung
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }
