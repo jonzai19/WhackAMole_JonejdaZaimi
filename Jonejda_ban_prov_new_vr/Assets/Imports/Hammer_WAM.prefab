@@ -314,3 +314,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HammerHit
   hitRadius: 0.15
   minSwingSpeed: 0.2
+  hitSound: {fileID: 8300000, guid: ec7af36f18422d74fab4650a5fee0fb4, type: 3}
+  hitVolume: 0.5

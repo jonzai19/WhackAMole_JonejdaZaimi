@@ -2,8 +2,7 @@ using UnityEngine;
 using TMPro;
 
 /// <summary>
-/// Singleton-ScoreManager: verwaltet den Spielstand und zeigt ihn auf einem UI-Text an.
-/// Ziehe das GameObject mit diesem Script in die Szene und weise ein TMP_Text-Element zu.
+/// Singleton-ScoreManager: verwaltet den Spielstand und Highscore.
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
@@ -13,14 +12,20 @@ public class ScoreManager : MonoBehaviour
     [Tooltip("TMP Text-Element das den Score anzeigt")]
     [SerializeField] private TMP_Text scoreText;
 
+    [Tooltip("TMP Text-Element das den Highscore anzeigt")]
+    [SerializeField] private TMP_Text highscoreText;
+
     [Header("Punkte pro Treffer")]
     [SerializeField] private int punkte = 10;
 
+    // PlayerPrefs-Schlüssel für den Highscore
+    private const string HighscoreKey = "Highscore";
+
     private int score = 0;
+    private int highscore = 0;
 
     void Awake()
     {
-        // Singleton-Muster
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -31,6 +36,8 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        // Highscore aus PlayerPrefs laden (bleibt auf der VR-Brille gespeichert)
+        highscore = PlayerPrefs.GetInt(HighscoreKey, 0);
         AktualisierUI();
     }
 
@@ -40,12 +47,21 @@ public class ScoreManager : MonoBehaviour
     public void WurmGetroffen()
     {
         score += punkte;
+
+        // Highscore aktualisieren falls aktueller Score gleich oder höher ist
+        if (score >= highscore)
+        {
+            highscore = score;
+            PlayerPrefs.SetInt(HighscoreKey, highscore);
+            PlayerPrefs.Save();
+        }
+
         AktualisierUI();
-        Debug.Log($"Treffer! Punkte: {score}");
+        Debug.Log($"Treffer! Punkte: {score} | Highscore: {highscore}");
     }
 
     /// <summary>
-    /// Setzt den Score zurück (z.B. beim Neustart).
+    /// Setzt den Score zurück (z.B. beim Neustart). Highscore bleibt erhalten.
     /// </summary>
     public void ResetScore()
     {
@@ -57,6 +73,8 @@ public class ScoreManager : MonoBehaviour
     {
         if (scoreText != null)
             scoreText.text = $"Score: {score}";
+
+        if (highscoreText != null)
+            highscoreText.text = $"Highscore: {highscore}";
     }
 }
-

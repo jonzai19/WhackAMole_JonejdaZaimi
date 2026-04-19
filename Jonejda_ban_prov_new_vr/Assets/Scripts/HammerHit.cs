@@ -12,6 +12,12 @@ public class HammerHit : MonoBehaviour
     [Tooltip("0 = immer aktiv")]
     [SerializeField] private float minSwingSpeed = 0f;
 
+    [Header("Audio")]
+    [Tooltip("Sound der abgespielt wird wenn ein Wurm getroffen wird")]
+    [SerializeField] private AudioClip hitSound;
+    [Tooltip("Lautstärke des Treffergeräusches")]
+    [SerializeField] private float hitVolume = 1f;
+
     private float cooldown;
     private Vector3 lastPos;
 
@@ -75,6 +81,10 @@ public class HammerHit : MonoBehaviour
         Debug.Log("[HammerHit] Wurm getroffen: " + mole.name + " | IsUp=" + mole.IsUp);
         mole.RegisterHit();
         cooldown = 0.4f;
+
+        // Treffergeräusch abspielen
+        if (hitSound != null)
+            AudioSource.PlayClipAtPoint(hitSound, transform.position, hitVolume);
     }
 
     void OnDrawGizmosSelected()
