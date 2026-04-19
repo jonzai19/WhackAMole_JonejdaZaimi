@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_LocalRotation.x
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_LocalRotation.z
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -78,7 +78,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 058b538529508294083e19e16ca36891, type: 3}
+      propertyPath: m_TagString
+      value: Hammer
       objectReference: {fileID: 0}
     - target: {fileID: 2574163397851897642, guid: 058b538529508294083e19e16ca36891, type: 3}
       propertyPath: m_LocalPosition.x
@@ -110,6 +114,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 058b538529508294083e19e16ca36891, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1434471842427198482}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 058b538529508294083e19e16ca36891, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4402501360744665726}
   m_SourcePrefab: {fileID: 100100000, guid: 058b538529508294083e19e16ca36891, type: 3}
 --- !u!1 &7879203588631778163 stripped
 GameObject:
@@ -138,7 +145,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
@@ -293,3 +300,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.085890256, y: 0.17692812, z: 0.047752388}
   m_Center: {x: 0.00015786836, y: -0.04488108, z: -0.000019308547}
+--- !u!114 &4402501360744665726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7879203588631778163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f411d70aa67742d094502ad5cacdef74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HammerHit
+  hitRadius: 0.15
+  minSwingSpeed: 0.2

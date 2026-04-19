@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FollowPlayerCanvas : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class FollowPlayerCanvas : MonoBehaviour
     public float followSpeed = 5f;
     public float rotationSpeed = 5f;
     [SerializeField] GameObject panel;
+    [SerializeField] string whackAMoleSceneName = "WhackAmole";
 
     void LateUpdate()
     {
@@ -28,7 +30,18 @@ public class FollowPlayerCanvas : MonoBehaviour
     
     public void OnStartButtonPressed()
     {
-        panel.SetActive(false);
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
+
+        if (string.IsNullOrWhiteSpace(whackAMoleSceneName))
+        {
+            Debug.LogError("Whack-a-Mole scene name is empty. Set it in the inspector.");
+            return;
+        }
+
+        SceneManager.LoadScene(whackAMoleSceneName);
     }
     
     public void OnExitButtonPressed()
